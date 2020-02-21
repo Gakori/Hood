@@ -4,12 +4,40 @@ from django.http import HttpResponse
 
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import UserRegisterForm
+from django.views.generic import ListView, CreateView
+
+from .forms import UserRegisterForm, PostForm
 
 from django.contrib import messages
 
+from django.urls import reverse_lazy
+
+from .models import Post
+
 def home(request):
-    return HttpResponse('kjhgfcdgh')
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+    else:
+        form = PostForm()
+
+    try:
+        posts = Post.objects.all()
+    except Post.DoesNotExist:
+        posts = None 
+        
+    return render(request, 'hoodie/home.html', { 'posts': posts, 'form': form })
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['name', 'description', 'location', 'photo']
+    success_url = reverse_lazy('home')
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
     
 def register(request):
     if request.method == 'POST':
