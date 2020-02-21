@@ -19,9 +19,15 @@ from django.contrib import admin
 
 from hoodie import views
 
+from django.conf import settings
+
 from hoodie import views as hoodie_views
 
+from django.conf.urls.static import static
+
 from django.contrib.auth import views as auth_views 
+
+from hoodie.views import PostCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +42,9 @@ urlpatterns = [
 
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
     
+    path('post/new/', PostCreateView.as_view(), name='post-create'),
+    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
