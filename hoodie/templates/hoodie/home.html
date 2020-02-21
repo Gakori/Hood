@@ -1,0 +1,23 @@
+{% extends 'hoodie/base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap4 %}
+<!-- {{ form.media }} -->
+
+{% block content %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+    </div>
+  </div>
+
+{% if posts %}
+{% for post in posts %}
+<div class="col-md-4">
+  <img class="img-fluid" src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt=""></div>
+  <h1>{{post.name}}</h1>
+  <h1>{{post.description}}</h1>
+  <h1>{{post.location}}</h1>
+{% endfor %}
+{% endif %}
+
+{% endblock content %}
