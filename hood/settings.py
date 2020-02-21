@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'hoodie.apps.HoodieConfig',
+    'pyuploadcare.dj',
     'bootstrap4',
     'crispy_forms',
     'django.contrib.admin',
@@ -57,7 +58,7 @@ ROOT_URLCONF = 'hood.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +70,11 @@ TEMPLATES = [
         },
     },
 ]
+
+UPLOADCARE = {
+    'pub_key': 'e2207e7694516786cad7',
+    'secret': '1116b7d173804ff267f5',
+}
 
 WSGI_APPLICATION = 'hood.wsgi.application'
 
@@ -124,6 +130,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR,'static'),
+]
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
