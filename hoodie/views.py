@@ -4,9 +4,15 @@ from django.http import HttpResponse
 
 from django.contrib.auth.forms import UserCreationForm
 
-from django.views.generic import ListView, CreateView
+from django.contrib.auth.models import User
 
-from .forms import UserRegisterForm, PostForm
+from django.contrib.auth.decorators import login_required
+
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from .forms import UserRegisterForm, PostForm, ProfileUpdateForm, UserUpdateForm
 
 from django.contrib import messages
 
@@ -32,12 +38,39 @@ def home(request):
 
 class PostCreateView(CreateView):
     model = Post
-    fields = ['name', 'description', 'location', 'photo']
+    fields = ['name', 'description', 'location', 'author', 'photo']
     success_url = reverse_lazy('home')
     
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+class PostDetailView(DetailView):
+    model = Post
+    
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Post
+    fields = ['name', 'description', 'photo']
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+    
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Post
+    success_url = '/'
+    
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
     
 def register(request):
     if request.method == 'POST':
@@ -50,3 +83,28 @@ def register(request):
     else:
         form = UserRegisterForm()
     return render(request, 'auth/register.html', {'form': form})
+
+@login_required
+def profile(request):
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+    
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated')
+            return redirect('profile')
+    
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+        
+    context = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    
+    return render(request, 'hoodie/profile.html', context)
+        
+    
