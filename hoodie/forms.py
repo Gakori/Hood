@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Post
+from .models import Post,Profile
 
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,3 +21,17 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('photo',)
+        
+class ProfileUpdateForm(forms.ModelForm):
+    
+    class Meta:
+        model = Profile             
+        fields = ['image']
+              
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email']
+        
