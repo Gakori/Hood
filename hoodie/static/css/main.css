@@ -4,3 +4,12 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.card{
+    margin-top: 10px;
+}
+
+form {
+    width: 300px;
+    margin: 0 auto;
+}
