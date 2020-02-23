@@ -3,6 +3,12 @@
 <!-- {{ form.media }} -->
 
 {% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h5 class="wel" style="font-size: 50px; color: whitesmoke;">WELCOME TO YOUR NEIGHBOURHOOD</h5>
+  </div>
+</div>
+
 <a href="{% url 'post-create' %}">CREATE NEIGHBOURHOOD</a>
 <div class="container">
   <div class="row">
@@ -12,18 +18,25 @@
         <img
           class="card-img-top"
           src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
-          alt="" style="height: 100%; width: 100%;"
+          alt=""
+          style="height: 100%; width: 100%;"
         />
         <div class="card-body">
           <a href="{% url 'post-detail' post.id %}">{{post.location}}</a>
         </div>
       </div>
     </div>
-          {% endfor %} {% endif %}
+    {% endfor %} {% endif %}
   </div>
 </div>
-{% endblock content %}
 
-<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="..." />
-</div>
+<footer>
+  <a href="https://www.facebook.com/" class="fa fa-facebook">faithgakori</a>
+  <a href="https://www.instagram.com/" class="fa fa-instagram">gakori</a>
+  <a href="" class="fa fa-phone"> 0713125890</a>
+  <a href="https://www.gmail.com/" class="fa fa-envelope"
+    >faithgakori@gmail.com</a
+  >
+  <p style="text-align: center; color: white;">© Copyright - Gakori 2020</p>
+</footer>
+{% endblock content %}

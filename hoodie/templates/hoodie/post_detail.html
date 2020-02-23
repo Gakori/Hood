@@ -2,13 +2,16 @@
 <div class="container">
   <div class="row">
     <div class="com-md-4">
+      <p class="det" style="text-align: center; font-size: 30px;">{{ object.location }} Details</p>
       <img
         class="img-fluid"
         src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
         alt=""
       />
       <h1>{{ object.name }}</h1>
-      <h1>{{ object.description }}</h1>
+      <h2>{{ object.description }}</h2>
+      <h3>Posted by {{ object.author }}</h3>
+      <h3>Posted on {{ object.date_posted|date:'F d, Y' }}</h3>
 
       {% if object.author == user %}
       <a href="{% url 'post-update' object.id %}" class="btn btn-secondary"
@@ -18,11 +21,14 @@
         >Delete</a
       >
       {% endif %}
-
-      <p>Posted by {{ object.author }}</p>
-      <p>Posted on {{ object.date_posted|date:'F d, Y' }}</p>
+      
     </div>
   </div>
 </div>
 {% endblock content %}
 
+<style>
+h3{
+  font-size: 15px;
+}
+</style>
