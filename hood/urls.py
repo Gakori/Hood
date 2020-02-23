@@ -27,7 +27,7 @@ from django.conf.urls.static import static
 
 from django.contrib.auth import views as auth_views 
 
-from hoodie.views import PostCreateView
+from hoodie.views import PostCreateView, PostDetailView, PostUpdateView, PostDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,6 +36,8 @@ urlpatterns = [
     
     path('', views.home, name='home'),
     
+    path('profile/', hoodie_views.profile, name='profile'),
+    
     path('register/', hoodie_views.register, name='register'),
 
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
@@ -43,6 +45,13 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
     
     path('post/new/', PostCreateView.as_view(), name='post-create'),
+    
+    path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
+    
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name='post-update'),
+    
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
+
     
 ]
 

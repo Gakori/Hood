@@ -1,0 +1,28 @@
+{% extends 'hoodie/base.html' %} {% load bootstrap4 %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="com-md-4">
+      <img
+        class="img-fluid"
+        src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+        alt=""
+      />
+      <h1>{{ object.name }}</h1>
+      <h1>{{ object.description }}</h1>
+
+      {% if object.author == user %}
+      <a href="{% url 'post-update' object.id %}" class="btn btn-secondary"
+        >Update</a
+      >
+      <a href="{% url 'post-delete' object.id %}" class="btn btn-danger"
+        >Delete</a
+      >
+      {% endif %}
+
+      <p>Posted by {{ object.author }}</p>
+      <p>Posted on {{ object.date_posted|date:'F d, Y' }}</p>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+

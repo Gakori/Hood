@@ -1,0 +1,22 @@
+{% extends 'hoodie/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom"></legend>
+            </fieldset>
+            <h2>Are you sure you want to delete this neighbourhood"{{object.name}}"</h2>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
+                <a href="{% url 'post-detail' object.id %}" class="btn btn-outline-sucsess">Cancel</a>
+            </div>
+        </form>
+        <div>
+            <small class="text-muted">Already Have an Account? <a href="{% url 'login' %}">Sign In</a></small>
+        </div>
+    </div>
+{% endblock content %}

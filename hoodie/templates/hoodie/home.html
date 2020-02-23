@@ -1,23 +1,29 @@
-{% extends 'hoodie/base.html' %}
-{% load crispy_forms_tags %}
-{% load bootstrap4 %}
+{% extends 'hoodie/base.html' %} {% load crispy_forms_tags %} {% load bootstrap4
+%}
 <!-- {{ form.media }} -->
 
 {% block content %}
-
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
+<a href="{% url 'post-create' %}">CREATE NEIGHBOURHOOD</a>
+<div class="container">
+  <div class="row">
+    {% if posts %} {% for post in posts %}
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img
+          class="card-img-top"
+          src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+          alt="" style="height: 100%; width: 100%;"
+        />
+        <div class="card-body">
+          <a href="{% url 'post-detail' post.id %}">{{post.location}}</a>
+        </div>
+      </div>
     </div>
+          {% endfor %} {% endif %}
   </div>
-
-{% if posts %}
-{% for post in posts %}
-<div class="col-md-4">
-  <img class="img-fluid" src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/" alt=""></div>
-  <h1>{{post.name}}</h1>
-  <h1>{{post.description}}</h1>
-  <h1>{{post.location}}</h1>
-{% endfor %}
-{% endif %}
-
+</div>
 {% endblock content %}
+
+<div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="..." />
+</div>
