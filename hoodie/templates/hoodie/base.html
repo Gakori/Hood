@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
         <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+        
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -22,6 +23,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
        
         <link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
         {% endblock %}
 
   </head>
@@ -37,7 +40,20 @@
           <li class="nav-item active">
             <a class="nav-link" href="{% url 'home' %}">Hood<span class="sr-only">(current)</span></a>
             </div>
-        
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Contacts</a>
+                <a class="dropdown-item" href="#">health:991</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Police:12013</a>
+              </div>
+            </li>
+
             {% if user.is_authenticated %}
             <a class="item" href="{% url 'logout' %}" style="color: black;">Logout</a>
             <a class="nav-link" href="{% url 'post-create' %}" style="color: black;">Post<span class="sr-only">(current)</span></a>

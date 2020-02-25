@@ -5,7 +5,9 @@
 {% block content %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h5 class="wel" style="font-size: 50px; color: whitesmoke;">WELCOME TO YOUR NEIGHBOURHOOD</h5>
+    <h5 class="wel" style="font-size: 50px; color: whitesmoke;">
+      WELCOME TO YOUR NEIGHBOURHOOD
+    </h5>
   </div>
 </div>
 
@@ -13,16 +15,18 @@
 <div class="container">
   <div class="row">
     {% if posts %} {% for post in posts %}
-    <div class="col-md-4">
-      <div class="card" style="width: 18rem;">
-        <img
-          class="card-img-top"
-          src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
-          alt=""
-          style="height: 100%; width: 100%;"
-        />
-        <div class="card-body">
-          <a href="{% url 'post-detail' post.id %}">{{post.location}}</a>
+    <div class="col-md-6">
+      <div class="w3-container">
+        <div class="w3-card-4" style="width:50%">
+          <img
+            class="card-img-top"
+            src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+            alt=""
+            style="width: 100%; margin-top: 10px;"
+          />
+          <div class="w3-container w3-center">
+            <a href="{% url 'post-detail' post.id %}">{{post.location}}</a>
+          </div>
         </div>
       </div>
     </div>

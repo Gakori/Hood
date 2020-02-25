@@ -1,34 +1,34 @@
 {% extends 'hoodie/base.html' %} {% load bootstrap4 %} {% block content %}
+
 <div class="container">
   <div class="row">
-    <div class="com-md-4">
-      <p class="det" style="text-align: center; font-size: 30px;">{{ object.location }} Details</p>
-      <img
-        class="img-fluid"
-        src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
-        alt=""
-      />
-      <h1>{{ object.name }}</h1>
-      <h2>{{ object.description }}</h2>
-      <h3>Posted by {{ object.author }}</h3>
-      <h3>Posted on {{ object.date_posted|date:'F d, Y' }}</h3>
-
-      {% if object.author == user %}
-      <a href="{% url 'post-update' object.id %}" class="btn btn-secondary"
-        >Update</a
-      >
-      <a href="{% url 'post-delete' object.id %}" class="btn btn-danger"
-        >Delete</a
-      >
-      {% endif %}
+    <div class="w3-container">
+      <p class="det" style="text-align: center; font-size: 30px;">
+        {{ object.location }} Details
+      </p>
+      <div class="w3-card-4" style="width:50%">
+        <img
+          class="img-fluid"
+          src="{{ post.photo.cdn_url }}-/crop/600x600/center/-/quality/lightest/"
+          alt=""
+        />
+        <h1 style="font-size: 20px;">{{ object.name }}</h1>
+        <h2 style="font-size: 20px;">{{ object.description }}</h2>
+        <h3 style="font-size: 20px;">Posted by {{ object.author }}</h3>
+        <h3 style="font-size: 15px;">
+          Posted on {{ object.date_posted|date:'F d, Y' }}
+        </h3>
       
-    </div>
+    {% if object.author == user %}
+    <a href="{% url 'post-update' object.id %}" class="btn btn-secondary"
+      >Update</a
+    >
+    <a href="{% url 'post-delete' object.id %}" class="btn btn-danger"
+      >Delete</a
+    >
+    {% endif %}
+  </div>
+</div>
   </div>
 </div>
 {% endblock content %}
-
-<style>
-h3{
-  font-size: 15px;
-}
-</style>
