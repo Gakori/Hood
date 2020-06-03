@@ -3,7 +3,6 @@
 
 ## AUTHOR
  * Built By Faith Gakori
- * Sharon
 
 ## PROJECT DESCRIPTION
  An Application that enables users to view their neighbourhoods. User can update, create and view their hood.
